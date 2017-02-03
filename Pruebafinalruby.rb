@@ -5,10 +5,9 @@ while opcion.to_i != 4
 	puts "Menu\n"
 	puts "Ingrese una opción"
 	puts "1- Generar archivo individual"
-	puts "2- Consultar stock total"
-	puts "3- Consultar item de mayor stock"
-	puts "4- Consultar existencia de articulo"
-	puts "5- Para salir del sistema"
+	puts "2- Consultar inasistencias totales"
+	puts "3- Consultar alumnos aprobados"
+	puts "4- Salir"
 
 	opcion = gets.chomp
 	
@@ -21,7 +20,8 @@ while opcion.to_i != 4
 				suma = 0
 				row.each{|elemento|suma += elemento if elemento.to_i > 0 and elemento.to_i < 11}
 				promedio = suma / 5
-				File.open(nombre, 'w'){ |file| file.puts(promedio)}
+				salida = nombre + " " + promedio.to_s 
+				File.open(nombre, 'w'){ |file| file.puts(salida)}
 			end
 				
 				
@@ -29,17 +29,31 @@ while opcion.to_i != 4
 		when 2
 			CSV.foreach('sample.csv') do |row|
 				c = 0
+					
 				row.each do |elemento|
-
-						puts elemento
-					if elemento == 'A'
+					if elemento.inspect == " A"
 						c += 1
 					end
 				end
 			
 				puts "Hubo #{c} inasistencias"
 			end
+		when 3
+			def aprobado(nombre, nota)
+				if nota >= 5
+					puts "#{nombre} esta aprobado"
+				else 
+					puts "#{nombre} esta reprobado"
+				end
+			end
 
+			CSV.foreach('sample.csv') do |row|
+				nombre = row[0]
+				suma = 0
+				row.each{|elemento|suma += elemento if elemento.to_i > 0 and elemento.to_i < 11}
+				promedio = suma / 5
+				aprobado(nombre, nota)
+			end
 		when 4
 			break	
 			
