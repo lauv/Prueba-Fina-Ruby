@@ -15,29 +15,30 @@ while opcion.to_i != 4
 	case opcion.to_i
 # 		Si el usuario ingresa la opción 1, se debe generar un archivo con el nombre de cada alumno y el promedio de sus notas.
 		when 1
-			# array = CSV.read("sample.csv")
-			# array.each do |elemento|
-			# 	puts elemento[0]
-			# end
-
+		
 			CSV.foreach('sample.csv', converters: :numeric) do |row|
 				nombre = row[0]
-				puts nombre
-				nota1 = row[1]
-				nota2 = row[2]
-				nota3 = row[3]
-				nota4 = row[4]
-				nota5 = row[5]
-				promedio = (nota1 + nota2 + nota3 + nota4 + nota5) / 5
-				puts promedio
-
-				# File.open(nombre, 'w'){ |file| file.puts(row.inspect)}
+				suma = 0
+				row.each{|elemento|suma += elemento if elemento.to_i > 0 and elemento.to_i < 11}
+				promedio = suma / 5
+				File.open(nombre, 'w'){ |file| file.puts(promedio)}
 			end
+				
+				
+				
 		when 2
-			
+			CSV.foreach('sample.csv') do |row|
+				c = 0
+				row.each do |elemento|
 
-		when 3
+						puts elemento
+					if elemento == 'A'
+						c += 1
+					end
+				end
 			
+				puts "Hubo #{c} inasistencias"
+			end
 
 		when 4
 			break	
