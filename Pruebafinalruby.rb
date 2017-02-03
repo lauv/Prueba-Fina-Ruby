@@ -31,6 +31,7 @@ while opcion.to_i != 4
 				c = 0
 					
 				row.each do |elemento|
+					puts elemento.inspect
 					if elemento.inspect == " A"
 						c += 1
 					end
