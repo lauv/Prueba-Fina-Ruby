@@ -48,8 +48,10 @@ class T
 end
 
 class Q < T
+	attr_accessor :dev
 	def initialize()
-		dev = T.new.method1
+		@dev = T.new.method1
+		return @dev
 	end
 end
 
