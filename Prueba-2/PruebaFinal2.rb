@@ -82,3 +82,11 @@ class Product
 	end
 end
 
+class Car
+	@@t_instances = 0
+	@@q_instances = 0
+end
+class T
+end
+class Q
+end
