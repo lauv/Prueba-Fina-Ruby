@@ -17,14 +17,12 @@ T.method1
 
 
 module PruebaMayor
-	class Prueba
-		@@A = 5
-		def self.A
-			@@A
-		end
+	A = 5
+	def A
+		A
 	end
 end
-prueba = PruebaMayor::Prueba.new
+prueba = PruebaMayor::A
 puts "Item 3: #{prueba}" 
 
 
@@ -36,7 +34,8 @@ class Complejo
 	end
 
 	def +(complejo)
-		puts Complejo.new(@x + complejo.x, @y + complejo.y)
+		com = Complejo.new(@x + complejo.x, @y + complejo.y)
+		puts "Item 4: #{com} se agregó attr_accessor"
 	end
 end
 
@@ -57,3 +56,30 @@ end
 
 claseQ = Q.new.dev
 puts "Item 5: #{claseQ}"
+
+
+module Priceable
+	attr_accessor :price
+	def discoutend_price(discount)
+		@price - @price * discount
+	end
+end
+
+module Stockable
+	attr_accessor :stock
+	def has_stock?(stock)
+		if stock > 0 
+			true
+		else
+			false
+		end
+	end
+end
+
+class Product
+	include Priceable
+	def initialize(price)
+		@price = price
+	end
+end
+
