@@ -39,7 +39,6 @@ class Complejo
 	end
 end
 
-
 class T
 	def method1
 		rand(0..20)
